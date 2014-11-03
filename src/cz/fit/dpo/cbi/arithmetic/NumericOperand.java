@@ -1,9 +1,11 @@
 package cz.fit.dpo.cbi.arithmetic;
 
+import cz.fit.dpo.cbi.arithmetic.iterator.PrimitiveIterator;
 import cz.fit.dpo.cbi.arithmetic.elements.ExpressionElement;
 import cz.fit.dpo.cbi.arithmetic.iterator.InOrderIterator;
 import cz.fit.dpo.cbi.arithmetic.iterator.PostOrderIterator;
 import cz.fit.dpo.cbi.arithmetic.elements.NumberElement;
+
 import java.util.Iterator;
 
 /**
@@ -16,6 +18,11 @@ public class NumericOperand extends ArithmeticExpression {
     public NumericOperand(Integer value) {
         this.value = value;
     }
+    
+    public Integer getValue()
+	{
+		return value;
+	}
 
     @Override
     public Integer evaluate() {
@@ -29,12 +36,12 @@ public class NumericOperand extends ArithmeticExpression {
 
     @Override
     public Iterator<ExpressionElement> getInOrderIterator() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    	return new PrimitiveIterator(getElem());
     }
 
     @Override
     public Iterator<ExpressionElement> getPostOrderIterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    	return new PrimitiveIterator(getElem());
     }
 
     

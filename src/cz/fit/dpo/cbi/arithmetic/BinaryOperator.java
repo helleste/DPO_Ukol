@@ -3,6 +3,9 @@ package cz.fit.dpo.cbi.arithmetic;
 import java.util.Deque;
 import java.util.Iterator;
 
+import cz.fit.dpo.cbi.arithmetic.ArithmeticExpression;
+import cz.fit.dpo.cbi.arithmetic.iterator.InOrderIterator;
+import cz.fit.dpo.cbi.arithmetic.iterator.PostOrderIterator;
 import cz.fit.dpo.cbi.arithmetic.elements.ExpressionElement;
 
 /**
@@ -29,23 +32,31 @@ public abstract class BinaryOperator extends ArithmeticExpression {
     	return evaluate(operand1, operand2);
     }
     
-    public Object getFirstOperand() {
+    public ArithmeticExpression getFirstOperand() {
         return firstOperand;
     }
 
-    public Object getSecondOperand() {
+    public ArithmeticExpression getSecondOperand() {
         return secondOperand;
     }
+    
+    public void setFirstOperand(ArithmeticExpression firstOperand) {
+		this.firstOperand = firstOperand;
+	}
+    
+    public void setSecondOperand(ArithmeticExpression secondOperand) {
+		this.secondOperand = secondOperand;
+	}
     
     // TODO Implement iterators
     @Override
     public Iterator<ExpressionElement> getInOrderIterator() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    	return (new InOrderIterator(this)); 
     }
 
     @Override
     public Iterator<ExpressionElement> getPostOrderIterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    	return (new PostOrderIterator(this));
     }
 
 }

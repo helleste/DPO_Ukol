@@ -1,5 +1,8 @@
 package cz.fit.dpo.cbi;
 
+import java.util.Iterator;
+
+import cz.fit.dpo.cbi.arithmetic.elements.ExpressionElement;
 import cz.fit.dpo.cbi.arithmetic.ArithmeticExpression;
 
 /**
@@ -15,6 +18,23 @@ public class ArithmeticExpressionPrinter {
     public ArithmeticExpressionPrinter(ArithmeticExpression expression) {
         this.expression = expression;
     }
+    
+    private String print(Iterator<ExpressionElement> it) {
+		StringBuilder sb = new StringBuilder();
+		while (it.hasNext()) {
+			sb.append(it.next().stringValue());
+		}
+		return sb.toString();
+	}
+    
+    private String printWithSpaces(Iterator<ExpressionElement> it) {
+		StringBuilder sb = new StringBuilder();
+		while (it.hasNext()) {
+			sb.append(it.next().stringValue());
+			if(it.hasNext()) sb.append(" ");
+		}
+		return sb.toString();
+	}
 
     /**
      * Print an expression in classical notation, e.g. (3+1).     
@@ -22,8 +42,8 @@ public class ArithmeticExpressionPrinter {
      * @return String in classical "inOrder" format.
      */
     public String printInOrder() {
-        // TODO: use the iterator here
-        throw new UnsupportedOperationException("Don't know how to do it :(");
+    	Iterator<ExpressionElement> it = expression.getInOrderIterator();
+		return print(it);
     }    
 
     /**
@@ -32,8 +52,8 @@ public class ArithmeticExpressionPrinter {
      * @return string in "postOrder" (RPN) format.
      */
     public String printPostOrder() {
-        // TODO: use the iterator here
-        throw new UnsupportedOperationException("Don't know how to do it :(");
+    	Iterator<ExpressionElement> it = expression.getPostOrderIterator();
+		return printWithSpaces(it);
     }
 
 }
